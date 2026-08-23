@@ -1,4 +1,4 @@
-import { ResultData } from "src/const/result";
+import { ResultData } from "src/const/Result";
 import { WebSocketManager } from "src/const/WebSocketManager";
 import { WebSocketDTO } from "src/dto/WebSocketDTO";
 

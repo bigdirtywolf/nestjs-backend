@@ -5,7 +5,7 @@ import { WebSocketService } from "src/service/WebSocketService";
 @Controller('ws')
 export class WebSocketController {
     constructor(
-        private readonly webSocketService: WebSocketService
+        private readonly webSocketService: WebSocketService,
     ) {}
 
     @Post('create')

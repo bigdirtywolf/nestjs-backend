@@ -40,7 +40,7 @@ async function bootstrap() {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     }));
-    await app.listen(process.env.PORT ?? 3012);
+    await app.listen(Number(process.env.PORT));
 }
 
 bootstrap();

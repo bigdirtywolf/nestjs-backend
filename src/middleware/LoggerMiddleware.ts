@@ -26,15 +26,17 @@ export function logger(req: Request, res: Response, next: () => any) {
     const code = res.statusCode;
     next();
 
-    const logFormat = ` >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        Request original url: ${req.originalUrl}
-        Method: ${req.method}
-        IP: ${req.ip}
-        Status code: ${code}
-        Parmas: ${JSON.stringify(req.params)}
-        Query: ${JSON.stringify(req.query)}
-        Body: ${JSON.stringify(req.body)} \n  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    `;
+    const logFormat = [
+        '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+        `Request original url: ${req.originalUrl}`,
+        `Method: ${req.method}`,
+        `IP: ${req.ip}`,
+        `Status code: ${code}`,
+        `Params: ${JSON.stringify(req.params)}`,
+        `Query: ${JSON.stringify(req.query)}`,
+        `Body: ${JSON.stringify(req.body)}`,
+        '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+    ].join('\n');
 
     if (code >= 500) {
         Logger.error(logFormat);

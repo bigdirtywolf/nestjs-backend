@@ -4,7 +4,7 @@ import {
     CanActivate,
     Injectable,
 } from '@nestjs/common';
-import { ResultData } from 'src/const/result';
+import { ResultData } from 'src/const/Result';
 import { CurrentUserDTO } from 'src/dto/CurrentUserDTO';
 
 export const CurrentUser = createParamDecorator<CurrentUserDTO>(
