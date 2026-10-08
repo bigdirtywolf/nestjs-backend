@@ -4,10 +4,35 @@ import { WebSocketDTO } from 'src/dto/WebSocketDTO';
 export class WebSocketManager {
     public id: string
     private server: Server
+    private webSocketDTO: WebSocketDTO
 
     constructor(
-        private readonly webSocketDTO: WebSocketDTO,
-    ) {}
+        webSocketDTO: WebSocketDTO,
+    ) {
+        this.webSocketDTO = webSocketDTO
+
+        if(!webSocketDTO.connectHandler || typeof webSocketDTO.connectHandler !== 'function') {
+            this.webSocketDTO.connectHandler = (client: Socket) => {
+                console.log('连接成功：',client.id)
+
+                client.emit('connect', {
+                    success: true,
+                    id: client.id,
+                })
+            }
+        }
+
+        if(!webSocketDTO.disconnectHandler || typeof webSocketDTO.disconnectHandler !== 'function') {
+            this.webSocketDTO.disconnectHandler = (client: Socket) => {
+                console.log('连接断开：',client.id)
+
+                client.emit('disconnect', {
+                    success: true,
+                    id: client.id,
+                })
+            }
+        }
+    }
 
     start() {
         try {

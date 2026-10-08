@@ -8,12 +8,22 @@ export class WebSocketDTO {
     @IsString()
     origin: string = '*'
 
-    connectHandler: (client: Socket) => void = (client: Socket) => { console.log('connected', client) }
+    connectHandler: (client: Socket) => void
 
-    disconnectHandler: (client: Socket) => void = (client: Socket) => { console.log('disconnected', client) }
+    disconnectHandler: (client: Socket) => void
 
     receivers: Map<string, (client: Socket, payload: any) => void> = new Map([
-        ['receiver1', (client: Socket, payload: any) => { console.log('receiver1', client, payload)}],
-        ['receiver2', (client: Socket, payload: any) => { console.log('receiver2', client, payload)}],
+        ['receiver1', (client: Socket, payload: any) => {
+            client.emit('response', {
+                success: true,
+                from: 'receiver1'
+            })
+        }],
+        ['receiver2', (client: Socket, payload: any) => {
+            client.emit('response', {
+                success: true,
+                from: 'receiver2'
+            })
+        }],
     ])
 }
